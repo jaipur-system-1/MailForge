@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "MailForge",
+  "version": "0.1.1",
+  "description": "Insert approved MailForge templates into Gmail.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://mailforge.dev.acuvisor.com/*",
+    "http://localhost:8501/*",
+    "http://127.0.0.1:8501/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["gmail-content-script.js"]
+    },
+    {
+      "matches": [
+        "https://mailforge.dev.acuvisor.com/*",
+        "http://localhost:8501/*",
+        "http://127.0.0.1:8501/*"
+      ],
+      "js": ["mailforge-bridge.js"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup/popup.html"
+  }
+}
+
